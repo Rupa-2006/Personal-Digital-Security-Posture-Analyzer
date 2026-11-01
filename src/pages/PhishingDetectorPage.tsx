@@ -7,13 +7,16 @@ import { Button } from '@/components/ui/button';
 
 export default function PhishingDetectorPage() {
   const [url, setUrl] = useState('');
-  const [result, setResult] = useState<ReturnType<typeof analyzeUrl> | null>(null);
+  // Keep the checked URL together with its result, so the result card can
+  // never show an old verdict next to a newly typed link.
+  const [result, setResult] = useState<(ReturnType<typeof analyzeUrl> & { checked: string }) | null>(null);
 
-  const handleCheck = () => {
-    if (!url) return;
-    let u = url;
-    if (!u.startsWith('http')) u = 'https://' + u;
-    setResult(analyzeUrl(u));
+  const handleCheck = (e: React.FormEvent) => {
+    e.preventDefault(); // lets the Enter key submit the form
+    const trimmed = url.trim();
+    if (!trimmed) return;
+    const u = /^[a-z][a-z0-9+.-]*:\/\//i.test(trimmed) ? trimmed : 'https://' + trimmed;
+    setResult({ ...analyzeUrl(u), checked: u });
   };
 
   return (
@@ -27,10 +30,10 @@ export default function PhishingDetectorPage() {
       </div>
 
       <GlowCard>
-        <div className="flex gap-3">
-          <Input placeholder="Enter a URL to check..." value={url} onChange={e => setUrl(e.target.value)} className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground font-mono" />
-          <Button onClick={handleCheck} disabled={!url} className="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0">Analyze</Button>
-        </div>
+        <form onSubmit={handleCheck} className="flex gap-3">
+          <Input placeholder="Enter a URL to check..." value={url} onChange={e => { setUrl(e.target.value); setResult(null); }} className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground font-mono" />
+          <Button type="submit" disabled={!url.trim()} className="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0">Analyze</Button>
+        </form>
       </GlowCard>
 
       {result && (
@@ -43,7 +46,7 @@ export default function PhishingDetectorPage() {
               <p className={`font-bold text-lg ${result.risk === 'Safe' ? 'text-success' : result.risk === 'Suspicious' ? 'text-warning' : 'text-destructive'}`}>
                 {result.risk}
               </p>
-              <p className="text-xs text-muted-foreground font-mono">{url}</p>
+              <p className="text-xs text-muted-foreground font-mono break-all">{result.checked}</p>
             </div>
           </div>
           {result.reasons.length > 0 && (

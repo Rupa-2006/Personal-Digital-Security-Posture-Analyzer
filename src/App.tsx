@@ -13,9 +13,8 @@ import PhishingDetectorPage from "./pages/PhishingDetectorPage";
 import PasswordGeneratorPage from "./pages/PasswordGeneratorPage";
 import BruteForceSimPage from "./pages/BruteForceSimPage";
 import DigitalFootprintPage from "./pages/DigitalFootprintPage";
-import DarkWebMonitorPage from "./pages/DarkWebMonitorPage";
 import BadgesPage from "./pages/BadgesPage";
-import AIAdvisorPage from "./pages/AIAdvisorPage";
+import SecurityTipsPage from "./pages/SecurityTipsPage";
 import SecurityReportPage from "./pages/SecurityReportPage";
 import NotFound from "./pages/NotFound";
 
@@ -38,9 +37,8 @@ const App = () => (
             <Route path="password-gen" element={<PasswordGeneratorPage />} />
             <Route path="brute-force" element={<BruteForceSimPage />} />
             <Route path="footprint" element={<DigitalFootprintPage />} />
-            <Route path="dark-web" element={<DarkWebMonitorPage />} />
             <Route path="badges" element={<BadgesPage />} />
-            <Route path="ai-advisor" element={<AIAdvisorPage />} />
+            <Route path="tips" element={<SecurityTipsPage />} />
             <Route path="report" element={<SecurityReportPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />

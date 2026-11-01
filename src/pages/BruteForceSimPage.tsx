@@ -44,7 +44,7 @@ export default function BruteForceSimPage() {
           <Globe className="w-6 h-6 text-primary" />
           Brute Force Attack Simulator
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">See how long it takes to crack a password</p>
+        <p className="text-sm text-muted-foreground mt-1">Estimate how long a brute-force attack would take (assumes an offline attacker trying 10 billion guesses per second; real attackers try leaked and common passwords first, which is much faster)</p>
       </div>
 
       <GlowCard>

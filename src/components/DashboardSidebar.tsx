@@ -1,19 +1,18 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Shield, LayoutDashboard, Key, Search, AlertTriangle, Lock, Globe, Fingerprint, MessageSquare, FileText, Zap, Trophy, Eye, LogOut } from 'lucide-react';
+import { Shield, LayoutDashboard, Key, Search, AlertTriangle, Lock, Globe, Fingerprint, MessageSquare, FileText, Zap, Trophy, LogOut } from 'lucide-react';
 import { useSecurityStore } from '@/lib/store';
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/dashboard/password-analyzer', label: 'Password Analyzer', icon: Key },
-  { path: '/dashboard/breach-lookup', label: 'Breach Lookup', icon: Search },
+  { path: '/dashboard/breach-lookup', label: 'Breach Check', icon: Search },
   { path: '/dashboard/accounts', label: 'Account Manager', icon: Lock },
   { path: '/dashboard/phishing', label: 'Phishing Detector', icon: AlertTriangle },
   { path: '/dashboard/password-gen', label: 'Password Generator', icon: Zap },
   { path: '/dashboard/brute-force', label: 'Attack Simulator', icon: Globe },
-  { path: '/dashboard/footprint', label: 'Digital Footprint', icon: Fingerprint },
-  { path: '/dashboard/dark-web', label: 'Dark Web Monitor', icon: Eye },
+  { path: '/dashboard/footprint', label: 'Footprint Self-Check', icon: Fingerprint },
   { path: '/dashboard/badges', label: 'Badges', icon: Trophy },
-  { path: '/dashboard/ai-advisor', label: 'AI Advisor', icon: MessageSquare },
+  { path: '/dashboard/tips', label: 'Security Tips', icon: MessageSquare },
   { path: '/dashboard/report', label: 'Security Report', icon: FileText },
 ];
 
