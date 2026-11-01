@@ -2,6 +2,8 @@
 
 A browser-based tool that helps people understand how secure their online accounts really are. You can check password strength, find out whether a password has appeared in **real data breaches**, spot password reuse across accounts, track MFA coverage, test suspicious links for phishing signs, and download a PDF report with a security score.
 
+🔗 **Live demo:** https://personal-digital-security-analyzer.netlify.app (no sign-up needed)
+
 **Privacy first:** there is no backend and no account. Everything runs in your browser and is kept in memory only, so closing the tab clears it. Passwords are never stored.
 
 Built with React, TypeScript, Vite, Tailwind CSS and shadcn/ui.
@@ -47,6 +49,10 @@ To tell whether two accounts share a password, the app needs *something* to comp
 - **Brand impersonation:** `paypal-login.example.com` contains "paypal" but isn't on `paypal.com`.
 - **Userinfo trick:** in `https://www.sbi.co.in@evil.example/`, the real host is `evil.example`.
 
+## Deployment
+
+Hosted on Netlify ([`netlify.toml`](netlify.toml)), which also sets security headers: a strict **Content Security Policy** (scripts only from the site itself, network requests only to `api.pwnedpasswords.com`), HSTS, `X-Frame-Options: DENY`, `nosniff`, `no-referrer` and a locked-down Permissions-Policy.
+
 ## Getting started
 
 Requires Node.js 18+.
@@ -91,7 +97,6 @@ src/
 - **Email breach search** needs a paid HIBP API key and a backend to keep that key secret, so the app links to haveibeenpwned.com instead of faking results.
 - The strength score is rule-based. Integrating [zxcvbn](https://github.com/dropbox/zxcvbn) would catch dictionary words and keyboard patterns better.
 - Phishing detection is heuristic only. A future version could check URLs against Google Safe Browsing.
-- Add a Content Security Policy in production, restricting `connect-src` to `api.pwnedpasswords.com`.
 
 ## Author
 
