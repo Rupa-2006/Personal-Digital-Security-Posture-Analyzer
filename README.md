@@ -55,7 +55,7 @@ Requires Node.js 18+.
 git clone https://github.com/Rupa-2006/Personal-Digital-Security-Posture-Analyzer.git
 cd Personal-Digital-Security-Posture-Analyzer
 npm install
-npm run dev      # http://localhost:8080
+npm run dev      # http://localhost:8080 (this computer only)
 npm test         # unit tests for the security logic
 npm run build    # production build in dist/
 ```
@@ -74,6 +74,17 @@ src/
 └── test/
     └── security.test.ts # Vitest unit tests
 ```
+
+## Dependency security
+
+`npm audit` is checked regularly. The project started with 24 advisories (3 critical, 3 high), which were fixed by:
+
+- removing 15 unused packages left over from the project template (including `zod`)
+- upgrading the libraries that ship to users: `jspdf` (DOMPurify XSS advisories) and `react-router-dom` (open redirect)
+- upgrading the dev tooling: `vite`, `vitest` and `jsdom`
+- binding the dev server to `localhost` only, so other devices on the same network can't reach it
+
+**Remaining (accepted risk):** 12 moderate advisories, all from a single root cause: a denial-of-service issue (glob pattern amplification) in `minimatch` used inside ESLint. No patched ESLint release exists yet, the linter runs only on the developer's machine against the project's own files, and it is never shipped to users. I'll revisit when ESLint updates its dependency.
 
 ## Limitations and future work
 
