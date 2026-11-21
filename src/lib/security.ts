@@ -14,7 +14,7 @@ export function analyzePassword(password: string): PasswordAnalysis {
     { criterion: 'Contains uppercase letters', met: /[A-Z]/.test(password), points: 15 },
     { criterion: 'Contains lowercase letters', met: /[a-z]/.test(password), points: 10 },
     { criterion: 'Contains numbers', met: /\d/.test(password), points: 15 },
-    { criterion: 'Contains special characters', met: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password), points: 15 },
+    { criterion: 'Contains special characters', met: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password), points: 15 },
     { criterion: 'No common patterns', met: !/(123|abc|password|qwerty|admin)/i.test(password), points: 10 },
   ];
 

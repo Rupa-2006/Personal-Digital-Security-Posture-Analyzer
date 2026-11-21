@@ -93,6 +93,8 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
         return;
       }
 
+      // Sync the initial scroll state from the external Embla instance, then subscribe.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       onSelect(api);
       api.on("reInit", onSelect);
       api.on("select", onSelect);
